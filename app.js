@@ -32,7 +32,9 @@ input.addEventListener("keyup", (e) => {
 
 tabBtn.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    myLeads.push(tabs[0].url);
+    addressInput.value = tabs[0].address;
+    nameInput.focus();
+    makeObject();
     localStorage.setItem("localLeads", JSON.stringify(myLeads));
     renderLeads();
   });
@@ -57,15 +59,19 @@ function buttonClick() {
   if (input.value != "") {
     myLeads.push(input.value);
   }
-  Name = nameInput.value;
-  address = addressInput.value;
-  let obj = new construct(Name, address)
-  myLeads.push(obj)
+  makeObject()
   nameInput.value = "";
   addressInput.value = "";
   localStorage.setItem("localLeads", JSON.stringify(myLeads));
   renderLeads();
   // renderLeads();
+}
+
+function makeObject() {
+  Name = nameInput.value;
+  address = addressInput.value;
+  let obj = new construct(Name, address)
+  myLeads.push(obj)
 }
 
 function renderLeads() {
