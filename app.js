@@ -32,7 +32,7 @@ input.addEventListener("keyup", (e) => {
 
 tabBtn.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    addressInput.value = tabs[0].address;
+    addressInput.value = tabs[0].url;
     nameInput.focus();
     makeObject();
     localStorage.setItem("localLeads", JSON.stringify(myLeads));
